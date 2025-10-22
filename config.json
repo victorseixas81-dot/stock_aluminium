@@ -1,0 +1,16 @@
+{
+  "empresa": "Sud Ouest Alu",
+  "email": "sudouest-alu@orange.fr",
+  "idioma_office": "fr-FR",
+  "impressao": {
+    "formato": "A4",
+    "orientacao": "Portrait",
+    "tema": "Classique",
+    "margens_cm": 2
+  },
+  "pastas": {
+    "export_pdf": "ExportPDF",
+    "modelos": "Modelos",
+    "import": "Import"
+  }
+}

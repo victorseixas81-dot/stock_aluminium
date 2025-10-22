@@ -1,0 +1,63 @@
+Guia rápido para criar a base de dados no Access (tabelas e relações)
+
+1) Crie uma nova BD em branco (GestaoStock.accdb).
+2) Crie as tabelas com os seguintes campos (tipos Access):
+
+Tabela: Fornecedores
+  - Fornecedor (Texto Curto, PK)
+  - Email (Texto Curto)
+  - Telefone (Texto Curto)
+  - PrazoDias (Número Inteiro)
+  - Obs (Texto Longo)
+
+Tabela: Artigos
+  - Codigo (Texto Curto, PK)
+  - Descricao (Texto Curto)
+  - Familia (Texto Curto)
+  - CorRAL (Texto Curto)
+  - Unidade (Texto Curto)
+  - StockAtual (Número Inteiro)
+  - StockMinimo (Número Inteiro)
+  - Fornecedor (Texto Curto)  --> FK para Fornecedores.Fornecedor
+  - Preco (Moeda)
+
+Tabela: Encomendas
+  - ID (AutoNumeração, PK)
+  - Fornecedor (Texto Curto)   --> FK Fornecedores.Fornecedor
+  - Data (Data/Hora)
+  - Obs (Texto Longo)
+
+Tabela: EncomendaLinhas
+  - ID (AutoNumeração, PK)
+  - EncomendaID (Número Inteiro)  --> FK Encomendas.ID
+  - Codigo (Texto Curto)           --> FK Artigos.Codigo
+  - Qtd (Número Duplo)
+  - PrecoUnit (Moeda)
+
+3) Crie relações 1-N conforme as FKs acima (Activar integridade referencial).
+
+4) Formulários sugeridos
+  - frmArtigos (contínuo) com pesquisa por Codigo/Descricao/CorRAL.
+  - frmFornecedores.
+  - frmEncomendas (cabeçalho + subformulário EncomendaLinhas).
+  - frmAlertas (consulta Artigos com StockAtual < StockMinimo).
+
+5) Consulta para alertas (SQL Access):
+  SELECT Codigo, Descricao, CorRAL, Unidade, StockAtual, StockMinimo, Fornecedor
+  FROM Artigos
+  WHERE StockAtual < StockMinimo
+  ORDER BY Fornecedor, Codigo;
+
+6) Relatório de Encomenda (A4, retrato) usando Encomendas + EncomendaLinhas.
+   Cabeçalho: empresa, fornecedor, data. Corpo: linhas. Rodapé: observações.
+   Defina margens 2 cm e tema clássico. Exportar para PDF na pasta ExportPDF.
+
+7) Botão "Gerar por mínimos":
+   - Consulta que agrupa Artigos por Fornecedor com (StockMinimo - StockAtual) > 0.
+   - Abre frmEncomendas e preenche linhas sugeridas com essa quantidade.
+
+8) Envio por email:
+   - Use DoCmd.SendObject acSendReport, "rptEncomenda", acFormatPDF, [EmailFornecedor],
+     , , "Encomenda " & [Fornecedor], "Segue a encomenda em anexo", True
+
+Dica: Guarde uma cópia .accde após testar.

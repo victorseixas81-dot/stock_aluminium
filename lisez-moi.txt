@@ -1,0 +1,18 @@
+📦 Pacote Starter — Sud Ouest Alu (Gestão de Stock)
+
+O que inclui
+├─ ExportPDF/Exemplo_Encomenda.pdf
+├─ Import/Artigos_Modelo.xlsx
+├─ Import/Fornecedores_Modelo.xlsx
+├─ Modelos/logo.png
+├─ config.json
+└─ A criar: GestaoStock.accdb (ver guia abaixo)
+
+Como usar (resumo)
+1) Mova esta pasta para: Documentos\SudOuestAlu\Stock
+2) No Access: Ficheiro → Opções → Centro de Fidedignidade → Locais Fidedignos → Adicionar a pasta acima.
+3) Abra o seu ficheiro GestaoStock.accdb (ou crie a partir do guia).
+4) Importe os modelos de Excel em Dados Externos → Excel → Anexar às tabelas existentes.
+5) Use a pasta ExportPDF como destino de exportação de relatórios.
+
+Nota: Este pacote não contém o ficheiro .accdb compilado, mas fornece os modelos, PDF de exemplo e guia.
